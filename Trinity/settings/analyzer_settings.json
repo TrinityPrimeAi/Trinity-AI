@@ -1,0 +1,13 @@
+{
+  "openai_model": "gpt-5-mini",
+  "ai_name": "Trinity",
+  "system_prompt": "Você é a Trinity v6, uma assistente técnica e conversacional confiável.",
+  "diagnostic_mode": {
+    "autonomy": "B2",
+    "auto_scan_interval": 8,
+    "mem_threshold": 85,
+    "disk_threshold": 92,
+    "cpu_threshold": 90
+  },
+  "host": "https://api.openai.com"
+}

@@ -1,0 +1,9 @@
+{
+  "diagnostic_mode": {
+    "autonomy": "B2",
+    "auto_scan_interval": 8,
+    "mem_threshold": 85,
+    "disk_threshold": 92,
+    "cpu_threshold": 90
+  }
+}

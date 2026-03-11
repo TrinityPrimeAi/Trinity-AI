@@ -1,0 +1,24 @@
+# --- Core ---
+requests
+tqdm
+colorama
+python-dotenv
+
+# --- GUI ---
+pillow
+
+# --- OpenAI / GPT-5 mini ---
+openai
+
+# --- RAG / Embeddings / NLP ---
+numpy
+scikit-learn
+sentence-transformers
+sqlite-utils
+
+# --- Hardware Monitor ---
+psutil
+GPUtil
+
+# --- Regex avançado ---
+regex
