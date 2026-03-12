@@ -20,7 +20,7 @@ The project was built with a strong focus on modularity, maintainability, and fu
 
 ## 🎬 Demo
 
-![Trinity Demo](docs/demo/trinity_demo.gif)
+![Trinity Demo](Trinity/docs/gifs/trinity_demo.gif)
 
 
 
