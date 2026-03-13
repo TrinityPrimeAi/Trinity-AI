@@ -21,6 +21,18 @@ from core.memory_manager import MemoryManager
 from hardware_info.hardware_info import get_all_common_info, get_hardware_summary, summary_to_text
 from core.facts_manager import FactsManager
 
+# processos sensíveis para Autofix
+sensitive_names = {
+    "screentogif.exe",
+    "obs64.exe",
+    "leagueclient.exe",
+    "valorant.exe",
+    "discord.exe",
+    "teams.exe",
+    "zoom.exe",
+    "blender.exe",
+}
+
 def classify_yes_no(text: str):
     t = (text or "").strip().lower()
 
@@ -106,6 +118,17 @@ FONT_SMALL = ("Consolas", 9)
 
 
 class TrinityApp:
+    def sensitive_process(self):
+        for proc in psutil.process_iter(['name']):
+            try:
+                name = (proc.info['name'] or "").lower()
+                if name in sensitive_names:
+                    return True
+            except (psutil.NoSuchProcess, psutil.AccessDenied):
+                pass
+
+        return False
+
     def __init__(self, root):
         self.user_id = "default"
         self.root = root
@@ -745,7 +768,9 @@ class TrinityApp:
         self.root.after(100, self.process_queue)
 
     # -------------------------
+
     def autofix(self):
+
         if self.is_generating:
             return
         self._append_chat("Trinity", "Iniciando autofix completo: limpando RAM, processos pesados e arquivos temporários...", "Trinity")
@@ -769,9 +794,18 @@ class TrinityApp:
             killed = 0
             killed_list = []
             current_pid = os.getpid()  # PID do próprio app
+
             for p in procs:
-                if p['pid'] == current_pid:
-                    continue  # Não mata o próprio processo
+                pid = p["pid"]
+                proc_name = p["name"].lower()
+
+                if pid == current_pid:
+                    continue
+
+                protected_names = {"python.exe", "screentogif.exe", "obs64.exe", "taskmgr.exe", "explorer.exe"}
+
+                if proc_name in protected_names:
+                    continue
                 if p['cpu_percent'] > 30:
                     res = self.monitor.kill_process(p['pid'])
                     if res[0]:
@@ -787,12 +821,19 @@ class TrinityApp:
                 except Exception:
                     pass
 
-            res_temp = clean_temp_files()
-            self._append_chat("Trinity", f"Arquivos temporários removidos: {res_temp}", "Trinity")
-            try:
-                self.memory.add("action", f"clean_temp -> {res_temp}")
-            except Exception:
-                pass
+            if self.sensitive_process():
+                self._append_chat(
+                    "Trinity",
+                    "Não posso limpar arquivos temporários agora. Detectei um processo sensível em execução.",
+                    "Trinity"
+                )
+            else:
+                res_temp = clean_temp_files()
+                self._append_chat("Trinity", f"Arquivos temporários removidos: {res_temp}", "Trinity")
+                try:
+                    self.memory.add("action", f"clean_temp -> {res_temp}")
+                except Exception:
+                    pass
 
             self._append_chat("Trinity", "Autofix completo finalizado.", "Trinity")
             try:
