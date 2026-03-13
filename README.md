@@ -16,6 +16,14 @@ The project was built with a strong focus on modularity, maintainability, and fu
 
 ---
 
+
+
+## 🎬 Demo
+
+![Trinity Demo](Trinity/docs/gifs/trinity_demo.gif)
+
+
+
 ## Key Features 🚀
 
 - Real-time streamed AI responses
@@ -45,9 +53,7 @@ The project was built with a strong focus on modularity, maintainability, and fu
   
 ---
 
-## Project Structure
-
-```
+```text
 Trinity-AI/
 ├─ README.md
 ├─ .gitignore
@@ -61,11 +67,12 @@ Trinity-AI/
 │  ├─ backend_storage/
 │  ├─ hardware_info/
 │  └─ settings/
+├─ docs/
 │  └─ screenshots/
-│  └─ memory/
-│  └─ logs/
-│  └─ cache/
-
+└─ runtime/
+   ├─ memory/
+   ├─ logs/
+   └─ cache/
 ```
 
 
@@ -156,27 +163,24 @@ Trinity is currently under active development.
 The project already has a functional modular foundation, and the current focus is on improving streaming behavior, memory logic, and intelligent routing between stored context and general knowledge.
 
 
-```md
+
 ## 📸 Screenshots
 
 ### System Monitoring
-
-![System Monitor](Trinity/docs/screenshots/System_monitoring.png)
+![System Monitoring](Trinity/docs/screenshots/System_monitoring.png)
 ![Psutil Monitor](Trinity/docs/screenshots/Psutil_monitor.png)
 
 ### Autofix Button
-
 ![Autofix](Trinity/docs/screenshots/Autofix.png)
 
 ### Hardware Information
-
 ![Hardware Info 1](Trinity/docs/screenshots/Hardware_info1.png)
 ![Hardware Info 2](Trinity/docs/screenshots/Hardware_info2.png)
 
 ### Trinity's Task Manager
-
 ![Task Manager](Trinity/docs/screenshots/Task_manager.png)
 ![Closing Program Confirmation](Trinity/docs/screenshots/Closing_program_confirmation.png)
+
 
 
 
